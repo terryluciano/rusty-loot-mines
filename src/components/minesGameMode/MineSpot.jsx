@@ -1,9 +1,14 @@
 import '../../stylesheets/minespot.css';
 
 export default function MineSpot(props) {
-	const cursorStyle = props.isGameActive ? 'pointer' : 'auto';
 	return (
-		<button style={{ cursor: cursorStyle }}>
+		<button
+			class='transition-all'
+			style={{
+				cursor: props.isGameActive ? 'pointer' : 'auto',
+				opacity: props.isGameActive ? 1 : 0.5,
+			}}
+		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='100'

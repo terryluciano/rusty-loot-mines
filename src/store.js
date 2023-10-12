@@ -113,16 +113,7 @@ export const state = createMutable({
 			},
 		],
 		get numberOfSafeSpots() {
-			let safeSpots = 0;
-			for (const spot in this.mines) {
-				if (
-					this.mines[spot].isBomb == false &&
-					this.mines[spot].isChosen == false
-				) {
-					safeSpots++;
-				}
-			}
-			return safeSpots;
+			return 25 - this.numberOfBombs;
 		},
 	},
 	minesAmountButton: [

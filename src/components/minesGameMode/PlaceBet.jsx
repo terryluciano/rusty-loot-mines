@@ -1,5 +1,6 @@
 import '../../stylesheets/minesPlaceBet.css';
 import BetAmountButton from './placeBet/BetAmountButton.jsx';
+import QuickOptionButton from './placeBet/QuickOptionButton';
 import MinesAmountButton from './placeBet/MinesAmountButton';
 import { state } from '../../store.js';
 import { For } from 'solid-js';
@@ -23,6 +24,22 @@ export default function PlaceBet() {
 	const updateBetAmount = (e) => {
 		const newValue = e.target.value;
 		state.game.betAmount = parseFloat(newValue);
+	};
+	const startGame = () => {
+		const betAmount = state.game.betAmount;
+		const numberOfBombsSelected = state.game.numberOfBombs;
+		console.log(betAmount, numberOfBombsSelected, state.game.isActive);
+		if (
+			betAmount >= 0.25 &&
+			numberOfBombsSelected > 0 &&
+			numberOfBombsSelected < 25 &&
+			state.game.isActive == false
+		) {
+			state.game.isActive = true;
+			console.log('Game Started');
+		} else {
+			console.log('error');
+		}
 	};
 	const element = (
 		<div
@@ -462,18 +479,18 @@ export default function PlaceBet() {
 						class='bg-transparent w-full'
 						onChange={updateBetAmount}
 					/>
-					<BetAmountButton value='1/2' />
-					<BetAmountButton value='x2' />
+					<QuickOptionButton option='1/2' />
+					<QuickOptionButton option='x2' />
 					<div class='w-px h-full bg-black/[0.16]'></div>
-					<BetAmountButton value='Clear' />
+					<QuickOptionButton option='Clear' />
 				</div>
 				<div class='flex flex-row justify-between items-center'>
-					<BetAmountButton value='+0.5' />
-					<BetAmountButton value='+1' />
-					<BetAmountButton value='+5' />
-					<BetAmountButton value='+10' />
-					<BetAmountButton value='+50' />
-					<BetAmountButton value='+100' />
+					<BetAmountButton value={0.5} />
+					<BetAmountButton value={1} />
+					<BetAmountButton value={5} />
+					<BetAmountButton value={10} />
+					<BetAmountButton value={50} />
+					<BetAmountButton value={100} />
 				</div>
 			</div>
 			<div class='mines-amount'>
@@ -551,7 +568,10 @@ export default function PlaceBet() {
 				</div>
 			</div>
 			<div class='mines-button'>
-				<button class='start-game-button flex flex-row gap-1 justify-center items-center'>
+				<button
+					class='start-game-button flex flex-row gap-1 justify-center items-center'
+					onClick={startGame}
+				>
 					<p>Start Game</p>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
