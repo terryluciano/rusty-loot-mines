@@ -1,12 +1,33 @@
 import '../../stylesheets/minesPlaceBet.css';
 import BetAmountButton from './placeBet/BetAmountButton.jsx';
 import MinesAmountButton from './placeBet/MinesAmountButton';
+import { state } from '../../store.js';
+import { For } from 'solid-js';
 
 export default function PlaceBet() {
+	const incrementMineAmount = () => {
+		const currentNumberOfBombs = state.game.numberOfBombs;
+		if (currentNumberOfBombs >= 0 && currentNumberOfBombs < 24) {
+			state.game.numberOfBombs++;
+		}
+	};
+	const decreaseMineAmount = () => {
+		const currentNumberOfBombs = state.game.numberOfBombs;
+		if (currentNumberOfBombs > 0 && currentNumberOfBombs <= 24) {
+			state.game.numberOfBombs--;
+		}
+	};
+	const setMaxMineAmount = () => {
+		state.game.numberOfBombs = 24;
+	};
+	const updateBetAmount = (e) => {
+		const newValue = e.target.value;
+		state.game.betAmount = parseFloat(newValue);
+	};
 	const element = (
 		<div
 			id='mines-place-bet'
-			class='flex flex-col gap-8 rounded-bl-xl rounded-tl-xl border-solid border-r p-8 h-full border-white/[.04]'
+			class='flex flex-col gap-8 rounded-bl-xl rounded-tl-xl p-8 h-full left-0 relative'
 		>
 			<div class='bet-amount'>
 				<p class='mb-2'>Bet Amount</p>
@@ -436,16 +457,17 @@ export default function PlaceBet() {
 						</defs>
 					</svg>
 					<input
-						type='text'
-						placeholder='0.50'
+						type='number'
+						value={state.game.betAmount.toFixed(2)}
 						class='bg-transparent w-full'
+						onChange={updateBetAmount}
 					/>
 					<BetAmountButton value='1/2' />
 					<BetAmountButton value='x2' />
 					<div class='w-px h-full bg-black/[0.16]'></div>
 					<BetAmountButton value='Clear' />
 				</div>
-				<div class='flex flex-row justify-between'>
+				<div class='flex flex-row justify-between items-center'>
 					<BetAmountButton value='+0.5' />
 					<BetAmountButton value='+1' />
 					<BetAmountButton value='+5' />
@@ -493,20 +515,39 @@ export default function PlaceBet() {
 						/>
 					</svg>
 					<input
-						type='text'
-						placeholder='0.50'
+						type='number'
+						value={state.game.numberOfBombs.toFixed(0)}
 						class='bg-transparent w-full'
 					/>
-					<BetAmountButton value='+' />
-					<BetAmountButton value='-' />
+					<button
+						class='bet-amount-button h-6 rounded border-white/[.08] border flex-shrink-0'
+						onClick={incrementMineAmount}
+					>
+						+
+					</button>
+					<button
+						class='bet-amount-button h-6 rounded border-white/[.08] border flex-shrink-0'
+						onClick={decreaseMineAmount}
+					>
+						-
+					</button>
 					<div class='w-px h-full bg-black/[0.16]'></div>
-					<BetAmountButton value='MAX' />
+					<button
+						class='bet-amount-button h-6 rounded border-white/[.08] border flex-shrink-0'
+						onClick={setMaxMineAmount}
+					>
+						MAX
+					</button>
 				</div>
 				<div class='flex flex-row justify-between'>
-					<MinesAmountButton value='x1' />
-					<MinesAmountButton value='x5' />
-					<MinesAmountButton value='x10' />
-					<MinesAmountButton value='x24' />
+					<For each={state.minesAmountButton}>
+						{(button, index) => (
+							<MinesAmountButton
+								key={index}
+								value={button.value}
+							/>
+						)}
+					</For>
 				</div>
 			</div>
 			<div class='mines-button'>
@@ -937,7 +978,7 @@ export default function PlaceBet() {
 							</linearGradient>
 						</defs>
 					</svg>
-					<p>0.00</p>
+					<p>{state.game.betAmount.toFixed(2)}</p>
 				</button>
 			</div>
 		</div>

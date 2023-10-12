@@ -1,0 +1,25 @@
+#mine-game-board {
+}
+
+.mines-game-count {
+	color: #fff;
+	font-feature-settings: 'clig' off, 'liga' off;
+	text-shadow: 0px 3.555680751800537px 3.555680751800537px rgba(0, 0, 0, 0.12);
+	font-family: 'Space Grotesk';
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 1.778px;
+}
+
+.mines-game-count span {
+	color: #9a9ec8;
+	font-feature-settings: 'clig' off, 'liga' off;
+	font-family: Space Grotesk;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 1.778px;
+}

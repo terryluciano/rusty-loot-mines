@@ -2,7 +2,7 @@ import '../../stylesheets/minesMoneyGained.css';
 
 export default function MoneyGained() {
 	return (
-		<div class='money-gained flex flex-row justify-center items-center gap-2'>
+		<div class='money-gained flex flex-row justify-center items-center gap-2 relative m-0'>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='38'

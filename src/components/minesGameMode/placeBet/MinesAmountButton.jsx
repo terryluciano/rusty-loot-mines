@@ -1,6 +1,14 @@
+import { state } from '../../../store.js';
+
 export default function MinesAmountButton(props) {
+	const changeMineAmount = () => {
+		state.game.numberOfBombs = props.value;
+	};
 	return (
-		<div class='mines-amount-button flex flex-row items-center justify-center gap-1'>
+		<button
+			class='mines-amount-button flex flex-row items-center justify-center gap-1 border border-[#ffffff08] focus:border-[#FFB436]'
+			onClick={changeMineAmount}
+		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='22'
@@ -36,7 +44,7 @@ export default function MinesAmountButton(props) {
 					fill-opacity='0.56'
 				/>
 			</svg>
-			<p>{props.value}</p>
-		</div>
+			<p>x{props.value}</p>
+		</button>
 	);
 }
