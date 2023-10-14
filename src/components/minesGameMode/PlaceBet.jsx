@@ -31,12 +31,11 @@ export default function PlaceBet() {
 		console.log(betAmount, numberOfBombsSelected, state.game.isActive);
 		if (
 			betAmount >= 0.25 &&
-			numberOfBombsSelected > 0 &&
-			numberOfBombsSelected < 25 &&
+			numberOfBombsSelected >= 1 &&
+			numberOfBombsSelected <= 24 &&
 			state.game.isActive == false
 		) {
-			state.game.isActive = true;
-			console.log('Game Started');
+			state.generateNewGame();
 		} else {
 			console.log('error');
 		}

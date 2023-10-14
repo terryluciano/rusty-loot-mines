@@ -1,6 +1,16 @@
 import '../../stylesheets/minespot.css';
 
 export default function MineSpot(props) {
+	const flipMineSpot = () => {
+		if (props.isGameActive) {
+			console.log('click');
+			if (props.isBomb) {
+				console.log('BOOM');
+			} else {
+				console.log('safe');
+			}
+		}
+	};
 	return (
 		<button
 			class='transition-all'
@@ -8,6 +18,7 @@ export default function MineSpot(props) {
 				cursor: props.isGameActive ? 'pointer' : 'auto',
 				opacity: props.isGameActive ? 1 : 0.5,
 			}}
+			onClick={flipMineSpot}
 		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
@@ -68,7 +79,7 @@ export default function MineSpot(props) {
 						stroke-opacity='0.03'
 					/>
 				</g>
-				<g filter='url(#filter1_di_8_10350)'>
+				<g filter='url(#filter1_di_8_10350'>
 					<path
 						fill-rule='evenodd'
 						clip-rule='evenodd'
@@ -240,21 +251,6 @@ export default function MineSpot(props) {
 						<stop offset='0.689282' />
 						<stop offset='1' stop-color='white' />
 					</linearGradient>
-					<radialGradient
-						id='paint4_radial_8_10350'
-						cx='0'
-						cy='0'
-						r='1'
-						gradientUnits='userSpaceOnUse'
-						gradientTransform='translate(50 25) rotate(90) scale(46 21)'
-					>
-						<stop stop-color='#FFB436' />
-						<stop
-							offset='1'
-							stop-color='#FFB436'
-							stop-opacity='0'
-						/>
-					</radialGradient>
 				</defs>
 			</svg>
 		</button>
