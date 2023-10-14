@@ -35,7 +35,7 @@ export default function PlaceBet() {
 			numberOfBombsSelected <= 24 &&
 			state.game.isActive == false
 		) {
-			state.generateNewGame();
+			state.game.generateNewGame();
 		} else {
 			console.log('error');
 		}

@@ -24,6 +24,7 @@ export default function GameBoard() {
 					{(item, index) => (
 						<MineSpot
 							key={index}
+							mineID={item.mineID}
 							isBomb={item.isBomb}
 							isChosen={item.isChosen}
 							isGameActive={state.game.isActive}

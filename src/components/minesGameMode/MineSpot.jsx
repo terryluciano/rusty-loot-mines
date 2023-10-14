@@ -1,4 +1,5 @@
 import '../../stylesheets/minespot.css';
+import { state } from '../../store.js';
 
 export default function MineSpot(props) {
 	const flipMineSpot = () => {
@@ -6,8 +7,10 @@ export default function MineSpot(props) {
 			console.log('click');
 			if (props.isBomb) {
 				console.log('BOOM');
+				state.game.mineChosen(props.mineID, false);
 			} else {
 				console.log('safe');
+				state.game.mineChosen(props.mineID, true);
 			}
 		}
 	};
