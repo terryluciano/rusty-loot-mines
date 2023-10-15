@@ -1,13 +1,23 @@
 import { state } from '../../../store.js';
+import { onMount } from 'solid-js';
 
 export default function MinesAmountButton(props) {
-	const changeMineAmount = () => {
-		state.game.numberOfBombs = props.value;
-	};
+	onMount(() => {
+		const bombsAmountInput = document.getElementById('bomb-amount-input');
+
+		const bombAmountButton = document.getElementById(
+			`bomb-amount-button-${props.value}`
+		);
+
+		bombAmountButton.addEventListener('click', () => {
+			bombsAmountInput.value = props.value;
+			state.game.numberOfBombs = props.value;
+		});
+	});
 	return (
 		<button
+			id={`bomb-amount-button-${props.value}`}
 			class='mines-amount-button flex flex-row items-center justify-center gap-1 border border-[#ffffff08] focus:border-[#FFB436]'
-			onClick={changeMineAmount}
 		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'

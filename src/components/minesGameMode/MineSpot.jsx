@@ -1,22 +1,54 @@
 import '../../stylesheets/minespot.css';
 import { state } from '../../store.js';
+import bombSpotImage from '../../assets/bomb-spot-found.png';
+import safeSpotImage from '../../assets/safe-spot-found.png';
 
 export default function MineSpot(props) {
+	const flipCardAnimation = (isSafe) => {
+		const cardBack = document.getElementById(
+			`card-back-${props.mineID}-img`
+		);
+		const cardBackDiv = document.getElementById(
+			`card-back-${props.mineID}`
+		);
+		const mineSpot = document.getElementById(`mine-${props.mineID}`);
+
+		if (cardBack) {
+			if (isSafe) {
+				cardBackDiv.classList.add('flip-positive');
+				cardBack.src = safeSpotImage;
+			} else {
+				cardBackDiv.classList.add('flip-negative');
+				cardBack.src = bombSpotImage;
+			}
+
+			cardBack.classList.add('animate-card');
+			mineSpot.classList.add('animate-card');
+		}
+	};
+
 	const flipMineSpot = () => {
 		if (props.isGameActive) {
 			console.log('click');
 			if (props.isBomb) {
 				console.log('BOOM');
+				flipCardAnimation(false);
 				state.game.mineChosen(props.mineID, false);
+				document.getElementById('start-game-button').style.display =
+					'flex';
+				document.getElementById('cashout-button').style.display =
+					'none';
 			} else {
 				console.log('safe');
+				flipCardAnimation(true);
 				state.game.mineChosen(props.mineID, true);
 			}
 		}
 	};
 	return (
 		<button
-			class='transition-all'
+			class='transition-all flip-card relative mine-spot'
+			id={`mine-${props.mineID}`}
 			style={{
 				cursor: props.isGameActive ? 'pointer' : 'auto',
 				opacity: props.isGameActive ? 1 : 0.5,
@@ -24,6 +56,7 @@ export default function MineSpot(props) {
 			onClick={flipMineSpot}
 		>
 			<svg
+				class='flip-card-front absolute'
 				xmlns='http://www.w3.org/2000/svg'
 				width='100'
 				height='100'
@@ -256,6 +289,16 @@ export default function MineSpot(props) {
 					</linearGradient>
 				</defs>
 			</svg>
+			<div
+				id={`card-back-${props.mineID}`}
+				class='flip-card-back absolute w-full h-full flex justify-center items-center'
+			>
+				<img
+					id={`card-back-${props.mineID}-img`}
+					class='card-back-img'
+					src=''
+				/>
+			</div>
 		</button>
 	);
 }

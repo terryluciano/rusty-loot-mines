@@ -77,8 +77,6 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 input[type='number'] {
-	-moz-appearance: textfield;
-	appearance: textfield;
 	margin: 0;
 }
 
@@ -231,5 +229,44 @@ input[type='number'] {
 		73.9% 182.51% at 47.87% -51.25%,
 		rgba(255, 180, 54, 0.4) 0%,
 		rgba(255, 180, 54, 0.1) 100%
+	);
+}
+
+.cashout-button {
+	width: 320px;
+	height: 40px;
+	flex-shrink: 0;
+	border-radius: 4px;
+	border: 1px solid rgba(39, 242, 120, 0);
+	background: radial-gradient(
+		73.9% 182.51% at 47.87% -51.25%,
+		rgba(39, 242, 120, 0.28) 0%,
+		rgba(39, 242, 120, 0) 100%
+	);
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12),
+		0px 2px 2px 0px rgba(0, 0, 0, 0.12),
+		0px 0px 6px 0px rgba(39, 242, 120, 0.24);
+	transition: all 0.15s linear;
+}
+
+.cashout-button p {
+	color: #27f278;
+	text-align: center;
+	font-feature-settings: 'clig' off, 'liga' off;
+	text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12);
+	font-family: Space Grotesk;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.1px;
+}
+
+.cashout-button:hover {
+	border-color: #27f27889;
+	background: radial-gradient(
+		73.9% 182.51% at 47.87% -51.25%,
+		rgba(39, 242, 120, 0.4) 0%,
+		rgba(39, 242, 120, 0.1) 100%
 	);
 }

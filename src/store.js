@@ -141,6 +141,12 @@ export const state = createMutable({
 		get numberOfSafeSpots() {
 			return 25 - this.numberOfBombs - this.spotsChosen;
 		},
+		setGameDefault() {
+			this.betAmount = 0;
+			this.isActive = false;
+			this.spotsChosen = 0;
+			this.profit = 0;
+		},
 		mineChosen(index, isSafe) {
 			if (this.mines[index].isChosen == false) {
 				this.mines[index].isChosen = true;
@@ -190,6 +196,7 @@ export const state = createMutable({
 				}
 
 				console.log(this.mines);
+				this.profit = this.betAmount;
 
 				this.isActive = true;
 			} else {
@@ -217,14 +224,12 @@ export const state = createMutable({
 				console.log('Profit:' + totalLoss);
 				state.user.balance += totalLoss;
 			} else {
-				let totalWon = this.betAmount + this.profit;
-				console.log('Profit: ' + totalWon);
-				state.user.balance += totalWon;
+				console.log('Profit: ' + this.profit);
+				state.user.balance += this.profit;
 			}
 
-			// reset game
 			this.profit = 0;
-			this.numberOfBombs = 1;
+			this.spotsChosen = 0;
 			this.isActive = false;
 		},
 	},
