@@ -16,8 +16,8 @@ export default function PlaceBet() {
 			const allCardBackImg =
 				document.getElementsByClassName('card-back-img');
 			const allMineSpots = document.getElementsByClassName('mine-spot');
-
-			console.log();
+			const allCardFrontSVG =
+				document.getElementsByClassName('flip-card-front');
 
 			for (let x = 0; x < allCardBack.length; x++) {
 				allCardBack[x].classList.remove('animate-card');
@@ -25,10 +25,9 @@ export default function PlaceBet() {
 				allCardBack[x].classList.remove('flip-positive');
 				allCardBackImg[x].src = '';
 				allMineSpots[x].classList.remove('animate-card');
+				allCardFrontSVG[x].style.removeProperty('display');
 			}
 		};
-
-		const showBombSpots = () => {};
 
 		const bombsAmountInput = document.getElementById('bomb-amount-input');
 
@@ -130,6 +129,7 @@ export default function PlaceBet() {
 				cashoutButton.style.display = 'flex';
 				startGameButton.style.display = 'none';
 				resetAllCards();
+				state.game.isBust = false;
 				state.game.generateNewGame();
 			} else {
 				console.log('error');

@@ -13,7 +13,12 @@ export default function MineSpot(props) {
 		);
 		const mineSpot = document.getElementById(`mine-${props.mineID}`);
 
+		const cardFrontSVG = document.getElementById(
+			`svg-front-${props.mineID}`
+		);
+
 		if (cardBack) {
+			cardFrontSVG.style.display = 'none';
 			if (isSafe) {
 				cardBackDiv.classList.add('flip-positive');
 				cardBack.src = safeSpotImage;
@@ -27,12 +32,33 @@ export default function MineSpot(props) {
 		}
 	};
 
+	/*
+	const showAllBombs = () => {
+
+		// not complete yet
+		if (cardBack) {
+			cardFrontSVG.style.display = 'none';
+			if (isSafe) {
+				cardBackDiv.classList.add('flip-positive');
+				cardBack.src = safeSpotImage;
+			} else {
+				cardBackDiv.classList.add('flip-negative');
+				cardBack.src = bombSpotImage;
+			}
+
+			cardBack.classList.add('animate-card');
+			mineSpot.classList.add('animate-card');
+		} 
+	}
+	*/
+
 	const flipMineSpot = () => {
 		if (props.isGameActive) {
 			console.log('click');
 			if (props.isBomb) {
 				console.log('BOOM');
 				flipCardAnimation(false);
+
 				state.game.mineChosen(props.mineID, false);
 				document.getElementById('start-game-button').style.display =
 					'flex';
@@ -62,6 +88,7 @@ export default function MineSpot(props) {
 				height='100'
 				viewBox='0 0 100 100'
 				fill='none'
+				id={`svg-front-${props.mineID}`}
 			>
 				<g filter='url(#filter0_d_8_10350)'>
 					<rect x='2' width='96' height='96' rx='8' fill='#212547' />

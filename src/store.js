@@ -7,10 +7,11 @@ export const state = createMutable({
 	},
 	game: {
 		isActive: false, // bool
-		betAmount: 0.5,
+		betAmount: 0,
 		profit: 0,
 		numberOfBombs: 1,
 		spotsChosen: 0,
+		isBust: false,
 		mines: [
 			{
 				mineID: 0,
@@ -153,9 +154,10 @@ export const state = createMutable({
 				this.spotsChosen++;
 
 				if (isSafe) {
-					this.profit += this.betAmount * 2;
+					this.profit += this.betAmount;
 					console.log(this.profit);
 				} else {
+					this.isBust = true;
 					this.gameEnd(true);
 				}
 			}
