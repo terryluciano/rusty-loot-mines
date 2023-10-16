@@ -5,11 +5,13 @@ export default function BetAmountButton(props) {
 		const betAmountInputBox = document.getElementById(
 			'bet-amount-input-box'
 		);
-		if (betAmountInputBox) {
-			betAmountInputBox.value = (
-				state.game.betAmount + props.value
-			).toFixed(2);
-			state.game.betAmount = state.game.betAmount + props.value;
+		if (state.game.isActive == false) {
+			if (betAmountInputBox) {
+				betAmountInputBox.value = (
+					state.game.betAmount + props.value
+				).toFixed(2);
+				state.game.betAmount = state.game.betAmount + props.value;
+			}
 		}
 	};
 	return (
