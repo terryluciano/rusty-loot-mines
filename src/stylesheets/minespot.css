@@ -33,6 +33,16 @@
 		0px 0px 8px 0px rgba(80, 150, 255, 0.24);
 }
 
+.logo-animation-layer {
+	stroke: yellow;
+	stroke-width: 1.5px;
+	stroke-dasharray: 456;
+	stroke-dashoffset: -456;
+	transition-property: stroke-dashoffset;
+	transition-duration: 0.75s;
+	transition-timing-function: ease;
+}
+
 /*.flip-card:hover .flip-card-inner */
 .animate-card {
 	transform: rotateY(180deg);

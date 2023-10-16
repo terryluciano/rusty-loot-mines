@@ -2,8 +2,19 @@ import '../../stylesheets/minespot.css';
 import { state } from '../../store.js';
 import bombSpotImage from '../../assets/bomb-spot-found.png';
 import safeSpotImage from '../../assets/safe-spot-found.png';
+import rlLogo from '../../assets/rusty-loot-logo-bg-removed.png';
+import { createSignal } from 'solid-js';
 
 export default function MineSpot(props) {
+	const loadingAnimation = () => {
+		const mineSpot = document.getElementById(`mine-${props.mineID}`);
+
+		const logoAnimationLayer =
+			mineSpot.childNodes[1].childNodes[1].childNodes[0].childNodes[0];
+		logoAnimationLayer.style.opacity = 1;
+		logoAnimationLayer.style.strokeDashoffset = 0;
+	};
+
 	const flipCardAnimation = (isSafe) => {
 		const cardBack = document.getElementById(
 			`card-back-${props.mineID}-img`
@@ -46,27 +57,42 @@ export default function MineSpot(props) {
 				cardBack.src = bombSpotImage;
 				cardBack.classList.add('animate-card');
 				mineSpot.classList.add('animate-card');
+				const logoAnimationLayer =
+					mineSpot.childNodes[1].childNodes[1].childNodes[0]
+						.childNodes[0];
+				console.log(logoAnimationLayer);
 			}
 		}
 	};
 
 	const flipMineSpot = () => {
 		if (props.isGameActive) {
-			console.log('click');
-			if (props.isBomb) {
-				console.log('BOOM');
-				flipCardAnimation(false);
-				showAllBombs();
-				state.game.mineChosen(props.mineID, false);
-				document.getElementById('start-game-button').style.display =
-					'flex';
-				document.getElementById('cashout-button').style.display =
-					'none';
-			} else {
-				console.log('safe');
-				flipCardAnimation(true);
-				state.game.mineChosen(props.mineID, true);
-			}
+			loadingAnimation();
+			setTimeout(() => {
+				console.log('click');
+				if (props.isBomb) {
+					console.log('BOOM');
+					flipCardAnimation(false);
+					showAllBombs();
+					state.game.mineChosen(props.mineID, false);
+					document.getElementById('start-game-button').style.display =
+						'flex';
+					document.getElementById('cashout-button').style.display =
+						'none';
+				} else {
+					console.log('safe');
+					flipCardAnimation(true);
+					state.game.mineChosen(props.mineID, true);
+				}
+				const mineSpot = document.getElementById(
+					`mine-${props.mineID}`
+				);
+				const logoAnimationLayer =
+					mineSpot.childNodes[1].childNodes[1].childNodes[0]
+						.childNodes[0];
+				logoAnimationLayer.style.opacity = 0;
+				logoAnimationLayer.style.strokeDashoffset = -456;
+			}, 750);
 		}
 	};
 
@@ -141,7 +167,7 @@ export default function MineSpot(props) {
 						stroke-opacity='0.03'
 					/>
 				</g>
-				<g filter='url(#filter1_di_8_10350'>
+				<g filter='url(#filter1_di_8_10350' class='logo-layer'>
 					<path
 						fill-rule='evenodd'
 						clip-rule='evenodd'
@@ -314,6 +340,43 @@ export default function MineSpot(props) {
 						<stop offset='1' stop-color='white' />
 					</linearGradient>
 				</defs>
+			</svg>
+			<svg
+				width='84.020569'
+				height='92.12487'
+				class='flip-card-front absolute w-[2.6rem] logo-animation-layer'
+				style='top: 48%;'
+				viewBox='0 0 22.230442 24.374705'
+				version='1.1'
+				id='svg1'
+				xml:space='preserve'
+				xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape'
+				xmlns:sodipodi='http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd'
+				xmlns='http://www.w3.org/2000/svg'
+				xmlns:svg='http://www.w3.org/2000/svg'
+			>
+				<defs id='defs1' />
+				<g
+					inkscape:label='Layer 1'
+					inkscape:groupmode='layer'
+					id='layer1'
+					transform='translate(-2.6982081,-0.76840688)'
+				>
+					<g
+						style='fill:none'
+						id='g1'
+						transform='matrix(0.26458333,0,0,0.26458333,0.15603333,0.51050801)'
+					>
+						<path
+							id='path1'
+							class='logo-animation-layer'
+							d='m 61.869469,0.98056741 c -1.898582,0.012 -3.340596,0.04166 -3.808594,0.10545999 -1.871992,0.255272 -2.785156,2.03125 -2.785156,2.03125 l -0.14062,1.046876 h 9.429688 l -1.117188,1.464844 -1.398436,0.492186 -3.98047,0.207032 -0.628906,1.746094 c 0,0 -19.420404,0.14018 -20.398438,0.07032 -0.978024,-0.06986 -4.121094,2.3749996 -4.121094,2.3749996 l -3.355468,7.617189 h -4.890626 l -2.835936,2.042968 c 0.07202,0.0453 0.10588,0.1567 0.03906,0.296876 l 0.0625,-0.11718 c 0,0 -2.766892,7.403094 -2.894532,7.871094 -0.12764,0.468 0.851562,1.363282 0.851562,1.363282 l 0.51172,0.08204 c 0.510546,0.0851 1.828124,-1.191406 1.828124,-1.191406 l 3.57422,0.04296 -0.16798,1.488282 c 0,0 -15.232495,41.652196 -15.8281231,43.992188 -0.595636,2.339992 0.2107441,4.043208 0.9765621,4.851562 0.765818,0.808364 3.023438,1.148438 3.023438,1.148438 h 14.082031 l 9.01953,-25.695312 c 0,0 -0.63657,0.16934 -2.976562,-0.08594 -2.339984,-0.255272 -2.425782,-2.554688 -2.425782,-2.554688 l 12.082032,0.17188 c 0,0 -10.127028,34.03445 -10.722656,35.140624 -0.595638,1.106182 -0.34046,2.425828 0.382812,4 0.723274,1.574182 2.980468,2.04297 2.980468,2.04297 0,0 50.754888,0.12806 52.031252,0.04296 1.276356,-0.0851 1.914062,-1.53125 1.914062,-1.53125 0,0 3.530392,-10.975752 3.445312,-12.464844 -0.0851,-1.489082 -1.232398,-2.172712 -2.210936,-2.257812 -0.978546,-0.0851 -1.871094,1.40625 -1.871094,1.40625 L 85.248375,78.13682 63.420249,50.097758 c 0,0 5.789436,0.426742 7.789064,0.1289 1.999628,-0.297818 3.487702,0.508896 9.316406,-2.128906 5.828702,-2.63781 10.97458,-8.803726 11.953126,-16.164064 C 93.457383,24.573354 90.606911,19.424802 86.990563,15.000091 83.374217,10.575393 75.205407,8.5743174 75.205407,8.5743174 l 1.234374,-4.382812 c 0,0 1.959572,0.212592 2.214844,-1.191408 0.255272,-1.403992 -1.277344,-1.914062 -1.277344,-1.914062 0,0 -9.812064,-0.14135999 -15.507812,-0.10545999 z M 21.842125,20.539162 c -0.0044,0.0068 -0.0092,0.0084 -0.0118,0.0118 -8.98e-4,0.0024 -0.0036,0.0064 -0.004,0.0078 -0.0044,0.0086 -0.0074,0.0186 -0.0118,0.02734 z m -0.02734,0.04688 -0.004,-0.004 c -0.0028,0.0104 -0.0044,0.02142 -0.0078,0.03126 z m -0.94922,1.79297 c -0.0026,0.0064 -0.0054,0.013 -0.0078,0.0196 l 0.0078,-0.0078 v -0.004 c 2.96e-4,-0.0042 8.84e-4,-0.01 0,-0.0078 z'
+							inkscape:export-filename='path1.svg'
+							inkscape:export-xdpi='96'
+							inkscape:export-ydpi='96'
+						/>
+					</g>
+				</g>
 			</svg>
 			<div
 				id={`card-back-${props.mineID}`}

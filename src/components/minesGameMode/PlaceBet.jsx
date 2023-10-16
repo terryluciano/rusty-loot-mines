@@ -42,7 +42,12 @@ export default function PlaceBet() {
 				allCardBack[x].classList.remove('flip-positive');
 				allCardBackImg[x].src = '';
 				allMineSpots[x].classList.remove('animate-card');
-				allCardFrontSVG[x].style.removeProperty('opacity');
+				allCardFrontSVG[x].style.opacity = 1;
+				allCardFrontSVG[x + 1].style.opacity = 1;
+			}
+
+			for (let x = 0; x < allCardFrontSVG.length; x++) {
+				allCardFrontSVG[x].style.opacity = 1;
 			}
 		};
 
