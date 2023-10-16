@@ -18,7 +18,7 @@ export default function MineSpot(props) {
 		);
 
 		if (cardBack) {
-			cardFrontSVG.style.display = 'none';
+			cardFrontSVG.style.opacity = 0;
 			if (isSafe) {
 				cardBackDiv.classList.add('flip-positive');
 				cardBack.src = safeSpotImage;
@@ -32,25 +32,23 @@ export default function MineSpot(props) {
 		}
 	};
 
-	/*
 	const showAllBombs = () => {
+		for (let x = 0; x < 25; x++) {
+			const cardBack = document.getElementById(`card-back-${x}-img`);
+			const cardBackDiv = document.getElementById(`card-back-${x}`);
+			const mineSpot = document.getElementById(`mine-${x}`);
 
-		// not complete yet
-		if (cardBack) {
-			cardFrontSVG.style.display = 'none';
-			if (isSafe) {
-				cardBackDiv.classList.add('flip-positive');
-				cardBack.src = safeSpotImage;
-			} else {
+			const cardFrontSVG = document.getElementById(`svg-front-${x}`);
+
+			if (state.game.mines[x].isBomb) {
+				cardFrontSVG.style.opacity = 0;
 				cardBackDiv.classList.add('flip-negative');
 				cardBack.src = bombSpotImage;
+				cardBack.classList.add('animate-card');
+				mineSpot.classList.add('animate-card');
 			}
-
-			cardBack.classList.add('animate-card');
-			mineSpot.classList.add('animate-card');
-		} 
-	}
-	*/
+		}
+	};
 
 	const flipMineSpot = () => {
 		if (props.isGameActive) {
@@ -58,7 +56,7 @@ export default function MineSpot(props) {
 			if (props.isBomb) {
 				console.log('BOOM');
 				flipCardAnimation(false);
-
+				showAllBombs();
 				state.game.mineChosen(props.mineID, false);
 				document.getElementById('start-game-button').style.display =
 					'flex';
@@ -71,6 +69,7 @@ export default function MineSpot(props) {
 			}
 		}
 	};
+
 	return (
 		<button
 			class='transition-all flip-card relative mine-spot'

@@ -15,7 +15,6 @@ export default function MinesPage() {
 					<MoneyGained />
 				</main>
 			</div>
-			<PastGamesHistory />
 		</div>
 	);
 	return element;

@@ -1,4 +1,4 @@
-.money-gained {
+.money-current-gained {
 	background: linear-gradient(
 		270deg,
 		rgba(92, 222, 144, 0.24) 0%,
@@ -7,9 +7,10 @@
 	width: 192px;
 	height: 40px;
 	flex-shrink: 0;
+	padding-right: 16px;
 }
 
-.money-gained p {
+.money-current-gained p {
 	font-feature-settings: 'clig' off, 'liga' off;
 	text-shadow: 0px 3.555680751800537px 3.555680751800537px rgba(0, 0, 0, 0.12);
 	font-family: Space Grotesk;
@@ -22,4 +23,85 @@
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	margin: 0px;
+}
+
+.money-loss-gained {
+	background: linear-gradient(
+		270deg,
+		rgba(214, 51, 51, 0.24) 0%,
+		rgba(214, 51, 51, 0) 100%
+	);
+	width: 192px;
+	height: 40px;
+	flex-shrink: 0;
+	padding-right: 16px;
+}
+
+.money-loss-gained p {
+	color: #d63333;
+	font-feature-settings: 'clig' off, 'liga' off;
+	text-shadow: 0px 3.555680751800537px 3.555680751800537px rgba(0, 0, 0, 0.12);
+	font-family: Space Grotesk;
+	font-size: 24.89px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 1.778px;
+	margin: 0px;
+}
+
+.money-next-gained {
+	background: linear-gradient(
+		270deg,
+		rgba(255, 180, 54, 0.08) 0%,
+		rgba(255, 180, 54, 0) 93.23%
+	);
+	width: 136px;
+	height: 32px;
+	flex-shrink: 0;
+	padding-right: 16px;
+	opacity: 0.36;
+}
+
+.money-next-gained p {
+	margin: 0px;
+	font-feature-settings: 'clig' off, 'liga' off;
+	text-shadow: 0px 2.5600903034210205px 2.5600903034210205px
+		rgba(0, 0, 0, 0.12);
+	font-family: Space Grotesk;
+	font-size: 17.921px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 1.28px;
+	background: radial-gradient(70% 70% at 50% 80%, #ffb436 0%, #ffd58f 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.money-past-gained {
+	width: 136px;
+	height: 32px;
+	flex-shrink: 0;
+	padding-right: 16px;
+	opacity: 0.36;
+}
+
+.money-past-gained p {
+	font-feature-settings: 'clig' off, 'liga' off;
+	text-shadow: 0px 2.5600903034210205px 2.5600903034210205px
+		rgba(0, 0, 0, 0.12);
+	font-family: Space Grotesk;
+	font-size: 17.921px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 1.28px;
+	background: radial-gradient(70% 70% at 50% 80%, #27f278 0%, #86ffb6 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin: 0px;
 }

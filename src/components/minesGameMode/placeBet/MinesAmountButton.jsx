@@ -10,8 +10,10 @@ export default function MinesAmountButton(props) {
 		);
 
 		bombAmountButton.addEventListener('click', () => {
-			bombsAmountInput.value = props.value;
-			state.game.numberOfBombs = props.value;
+			if (state.game.isActive == false) {
+				bombsAmountInput.value = props.value;
+				state.game.numberOfBombs = props.value;
+			}
 		});
 	});
 	return (

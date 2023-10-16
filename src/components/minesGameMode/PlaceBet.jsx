@@ -3,14 +3,31 @@ import BetAmountButton from './placeBet/BetAmountButton.jsx';
 import QuickOptionButton from './placeBet/QuickOptionButton';
 import MinesAmountButton from './placeBet/MinesAmountButton';
 import { state } from '../../store.js';
-import { For, Match, Show, onMount } from 'solid-js';
-import mineButtonSVG from '../../assets/bomb-button.svg';
-import rlCoinLogoSmallSVG from '../../assets/rl-coin-logo-small.svg';
+import { For, onMount } from 'solid-js';
+
+import bombSpotImage from '../../assets/bomb-spot-found.png';
 
 export default function PlaceBet() {
 	onMount(() => {
+		const showAllBombs = () => {
+			for (let x = 0; x < 25; x++) {
+				const cardBack = document.getElementById(`card-back-${x}-img`);
+				const cardBackDiv = document.getElementById(`card-back-${x}`);
+				const mineSpot = document.getElementById(`mine-${x}`);
+
+				const cardFrontSVG = document.getElementById(`svg-front-${x}`);
+
+				if (state.game.mines[x].isBomb) {
+					cardFrontSVG.style.opacity = 0;
+					cardBackDiv.classList.add('flip-negative');
+					cardBack.src = bombSpotImage;
+					cardBack.classList.add('animate-card');
+					mineSpot.classList.add('animate-card');
+				}
+			}
+		};
+
 		const resetAllCards = () => {
-			// need to reset the flip of all the cards on new game (mine-spot card-back {transform: rotateY(0deg)})
 			const allCardBack =
 				document.getElementsByClassName('flip-card-back');
 			const allCardBackImg =
@@ -25,7 +42,7 @@ export default function PlaceBet() {
 				allCardBack[x].classList.remove('flip-positive');
 				allCardBackImg[x].src = '';
 				allMineSpots[x].classList.remove('animate-card');
-				allCardFrontSVG[x].style.removeProperty('display');
+				allCardFrontSVG[x].style.removeProperty('opacity');
 			}
 		};
 
@@ -45,6 +62,9 @@ export default function PlaceBet() {
 		startGameButton.style.display = 'flex';
 
 		const betAmountInput = document.getElementById('bet-amount-input-box');
+
+		state.game.betAmount = parseFloat(betAmountInput.value);
+		state.game.numberOfBombs = parseInt(bombsAmountInput.value);
 
 		betAmountInput.addEventListener('input', function () {
 			console.log(this.value);
@@ -138,6 +158,7 @@ export default function PlaceBet() {
 
 		cashoutButton.addEventListener('click', () => {
 			if (state.game.isActive) {
+				showAllBombs();
 				state.game.gameEnd(false);
 				cashoutButton.style.display = 'none';
 				startGameButton.style.display = 'flex';
@@ -581,7 +602,7 @@ export default function PlaceBet() {
 						name='bet-amount'
 						class='bg-transparent w-full'
 						id='bet-amount-input-box'
-						step='0.01'
+						value='0.50'
 						pattern='^\d+(?:\.\d{1,2})?$'
 						placeholder='0'
 					/>
@@ -641,6 +662,7 @@ export default function PlaceBet() {
 						id='bomb-amount-input'
 						type='number'
 						name='mine-amount'
+						value='1'
 						class='bg-transparent w-full'
 						placeholder='1'
 					/>

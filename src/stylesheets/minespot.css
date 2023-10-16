@@ -51,5 +51,5 @@
 
 .flip-card-front {
 	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden; /* Safari */
+	-webkit-backface-visibility: hidden;
 }

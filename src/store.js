@@ -12,6 +12,9 @@ export const state = createMutable({
 		numberOfBombs: 1,
 		spotsChosen: 0,
 		isBust: false,
+		moneyGained: [],
+		winner: false,
+		cashoutAmount: 0,
 		mines: [
 			{
 				mineID: 0,
@@ -142,6 +145,15 @@ export const state = createMutable({
 		get numberOfSafeSpots() {
 			return 25 - this.numberOfBombs - this.spotsChosen;
 		},
+		get nextMoneyGained() {
+			return this.profit + this.betAmount;
+		},
+		addMoneyGained(newValue) {
+			if (this.spotsChosen > 2) {
+				const newMoneyGained = { value: newValue - this.betAmount };
+				this.moneyGained.unshift(newMoneyGained);
+			}
+		},
 		setGameDefault() {
 			this.betAmount = 0;
 			this.isActive = false;
@@ -155,6 +167,7 @@ export const state = createMutable({
 
 				if (isSafe) {
 					this.profit += this.betAmount;
+					this.addMoneyGained(this.profit);
 					console.log(this.profit);
 				} else {
 					this.isBust = true;
@@ -199,7 +212,8 @@ export const state = createMutable({
 
 				console.log(this.mines);
 				this.profit = this.betAmount;
-
+				this.winner = false;
+				this.cashoutAmount = 0;
 				this.isActive = true;
 			} else {
 				console.log('Error when creating new game');
@@ -228,11 +242,15 @@ export const state = createMutable({
 			} else {
 				console.log('Profit: ' + this.profit);
 				state.user.balance += this.profit;
+				this.winner = true;
+				const cashVal = this.profit;
+				this.cashoutAmount = cashVal;
 			}
 
 			this.profit = 0;
 			this.spotsChosen = 0;
 			this.isActive = false;
+			this.moneyGained = [];
 		},
 	},
 	minesAmountButton: [
