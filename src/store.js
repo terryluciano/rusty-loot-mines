@@ -153,6 +153,9 @@ export const state = createMutable({
 				const newMoneyGained = { value: newValue - this.betAmount };
 				this.moneyGained.unshift(newMoneyGained);
 			}
+			if (this.spotsChosen > 9) {
+				this.moneyGained.pop();
+			}
 		},
 		setGameDefault() {
 			this.betAmount = 0;
