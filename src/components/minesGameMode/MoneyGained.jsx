@@ -8,7 +8,7 @@ import { For } from 'solid-js';
 
 export default function MoneyGained() {
 	return (
-		<div class='money-gained flex flex-col justify-center items-end self-start mt-48 gap-3 overflow-x-hidden'>
+		<div class='money-gained flex flex-col justify-start items-end self-center mt-48 gap-3 overflow-x-hidden'>
 			<NextProfit />
 			<Show when={state.game.isBust} fallback={<CurrentProfit />}>
 				<LossProfit />

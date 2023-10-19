@@ -3,7 +3,7 @@ import BetAmountButton from './placeBet/BetAmountButton.jsx';
 import QuickOptionButton from './placeBet/QuickOptionButton';
 import MinesAmountButton from './placeBet/MinesAmountButton';
 import { state } from '../../store.js';
-import { For, onMount } from 'solid-js';
+import { For, onMount, Show } from 'solid-js';
 
 import bombSpotImage from '../../assets/bomb-spot-found.png';
 
@@ -175,9 +175,15 @@ export default function PlaceBet() {
 			id='mines-place-bet'
 			class='flex flex-col gap-8 rounded-bl-xl rounded-tl-xl p-8 h-full left-0 relative'
 		>
+			<Show when={state.game.isActive}>
+				<div
+					id='place-bet-overlay'
+					class='absolute top-[-50%] left-[-50%] translate-x-1/2 translate-y-1/2 bg-[#00000033] w-full h-full rounded rounded-tl-xl rounded-bl-xl z-[2]'
+				></div>
+			</Show>
 			<div class='bet-amount'>
 				<p class='mb-2'>Bet Amount</p>
-				<div class='bet-amount-input flex flex-row items-center flex-1 p-2 rounded gap-2 mb-3 h-full'>
+				<div class='bet-amount-input flex flex-row items-center flex-1 p-2 rounded rounded-tl-xl rounded-bl-xl gap-2 mb-3 h-full'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						width='21'
@@ -702,7 +708,7 @@ export default function PlaceBet() {
 					</For>
 				</div>
 			</div>
-			<div class='mines-button'>
+			<div class='mines-button z-[3]'>
 				<button
 					id='cashout-button'
 					class='cashout-button flex-row gap-1 justify-center items-center'

@@ -19,7 +19,7 @@ export default function MinesAmountButton(props) {
 	return (
 		<button
 			id={`bomb-amount-button-${props.value}`}
-			class='mines-amount-button flex flex-row items-center justify-center gap-1 border border-[#ffffff08] focus:border-[#FFB436]'
+			class='mines-amount-button flex flex-row items-center justify-center gap-1 border border-[#ffffff08] focus:border-[#FFB436] text-sm focus:text-[#FFB436]'
 		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'

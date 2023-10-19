@@ -2,11 +2,10 @@ import '../../stylesheets/minespot.css';
 import { state } from '../../store.js';
 import bombSpotImage from '../../assets/bomb-spot-found.png';
 import safeSpotImage from '../../assets/safe-spot-found.png';
-import rlLogo from '../../assets/rusty-loot-logo-bg-removed.png';
-import { createSignal } from 'solid-js';
 
 export default function MineSpot(props) {
 	const loadingAnimation = () => {
+		state.game.isFlipAnimation = true;
 		const mineSpot = document.getElementById(`mine-${props.mineID}`);
 
 		const logoAnimationLayer =
@@ -66,8 +65,9 @@ export default function MineSpot(props) {
 	};
 
 	const flipMineSpot = () => {
-		if (props.isGameActive) {
+		if (props.isGameActive && state.game.isFlipAnimation == false) {
 			loadingAnimation();
+			//const randomDelay = Math.floor(Math.random() * (750 - 100) + 1);
 			setTimeout(() => {
 				console.log('click');
 				if (props.isBomb) {
@@ -92,6 +92,7 @@ export default function MineSpot(props) {
 						.childNodes[0];
 				logoAnimationLayer.style.opacity = 0;
 				logoAnimationLayer.style.strokeDashoffset = -456;
+				state.game.isFlipAnimation = false;
 			}, 750);
 		}
 	};

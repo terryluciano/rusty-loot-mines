@@ -15,6 +15,7 @@ export const state = createMutable({
 		moneyGained: [],
 		winner: false,
 		cashoutAmount: 0,
+		isFlipAnimation: false,
 		mines: [
 			{
 				mineID: 0,

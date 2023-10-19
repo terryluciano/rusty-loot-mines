@@ -1,5 +1,10 @@
 .money-gained {
-	max-height: calc(640px - 192px);
+	height: calc(640px - 192px);
+	mask-image: linear-gradient(
+		to bottom,
+		black calc((640px - 192px) - 200px),
+		transparent 100%
+	);
 }
 
 .money-current-gained {
