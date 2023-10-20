@@ -1,6 +1,7 @@
 .mine-spot {
 	width: 100px;
 	height: 100px;
+	transition: all 300ms ease;
 }
 
 .flip-negative {
@@ -43,7 +44,6 @@
 	transition-timing-function: ease;
 }
 
-/*.flip-card:hover .flip-card-inner */
 .animate-card {
 	transform: rotateY(180deg);
 }

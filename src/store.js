@@ -150,11 +150,11 @@ export const state = createMutable({
 			return this.profit + this.betAmount;
 		},
 		addMoneyGained(newValue) {
-			if (this.spotsChosen > 2) {
+			if (this.spotsChosen > 1) {
 				const newMoneyGained = { value: newValue - this.betAmount };
 				this.moneyGained.unshift(newMoneyGained);
 			}
-			if (this.spotsChosen > 9) {
+			if (this.spotsChosen > 8) {
 				this.moneyGained.pop();
 			}
 		},

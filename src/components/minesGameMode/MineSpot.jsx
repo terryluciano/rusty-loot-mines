@@ -99,7 +99,7 @@ export default function MineSpot(props) {
 
 	return (
 		<button
-			class='transition-all flip-card relative mine-spot'
+			class='flip-card relative mine-spot'
 			id={`mine-${props.mineID}`}
 			style={{
 				cursor: props.isGameActive ? 'pointer' : 'auto',

@@ -1,12 +1,4 @@
-- Font for the mines amount looks to be incorrect. 
-
-- Start game button seems to be styled incorrectly (Border does not seem to exist)
-
 - Mines selected state button seems to be styled incorrectly (Border is solid when it should be a gradient)
-
-- Border around the bet amount input field appears to be missing. 
-
-- Border around the mines amount input field appears to be missing. 
 
 - Side history seems to be to far up vertically(Should be centered)
 
@@ -14,6 +6,4 @@
 
 - Game itself feels laggy and buggy
 
-- If clicking tiles quickly and player hits a mine it will still uncover other tiles pressed
-
-- Sometime players can click mines and see the RL loading animation after the game is over.
+- remove loading animation on bombs spots
