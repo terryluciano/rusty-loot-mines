@@ -2,16 +2,45 @@ import '../../stylesheets/minespot.css';
 import { state } from '../../store.js';
 import bombSpotImage from '../../assets/bomb-spot-found.png';
 import safeSpotImage from '../../assets/safe-spot-found.png';
+import { createEffect, onMount } from 'solid-js';
 
 export default function MineSpot(props) {
-	const loadingAnimation = () => {
-		state.game.isFlipAnimation = true;
-		const mineSpot = document.getElementById(`mine-${props.mineID}`);
+	onMount(() => {
+		createEffect(() => {
+			const mineSpot = document.getElementById(`mine-${props.mineID}`);
+			if (mineSpot) {
+				if (state.game.isActive) {
+					mineSpot.style.opacity = 1;
+				} else if (
+					state.game.isActive == false &&
+					state.game.mines[props.mineID].isBomb
+				) {
+					mineSpot.style.opacity = 1;
+				} else if (
+					state.game.isActive == false &&
+					state.game.winner &&
+					state.game.mines[props.mineID].isChosen
+				) {
+					mineSpot.style.opacity = 1;
+				} else {
+					mineSpot.style.opacity = 0.5;
+				}
+			}
+		});
+	});
 
-		const logoAnimationLayer =
-			mineSpot.childNodes[1].childNodes[1].childNodes[0].childNodes[0];
-		logoAnimationLayer.style.opacity = 1;
-		logoAnimationLayer.style.strokeDashoffset = 0;
+	const loadingAnimation = () => {
+		if (state.game.mines[props.mineID].isChosen == false) {
+			const mineSpot = document.getElementById(`mine-${props.mineID}`);
+
+			const logoAnimationLayer =
+				mineSpot.childNodes[1].childNodes[1].childNodes[0]
+					.childNodes[0];
+			const strokeDashoffset =
+				0 - (state.game.getRandomLoadingDelay() * 456) / 750;
+			logoAnimationLayer.style.opacity = 1;
+			logoAnimationLayer.style.strokeDashoffset = strokeDashoffset;
+		}
 	};
 
 	const flipCardAnimation = (isSafe) => {
@@ -56,44 +85,42 @@ export default function MineSpot(props) {
 				cardBack.src = bombSpotImage;
 				cardBack.classList.add('animate-card');
 				mineSpot.classList.add('animate-card');
-				const logoAnimationLayer =
-					mineSpot.childNodes[1].childNodes[1].childNodes[0]
-						.childNodes[0];
-				console.log(logoAnimationLayer);
 			}
 		}
 	};
 
 	const flipMineSpot = () => {
-		if (props.isGameActive && state.game.isFlipAnimation == false) {
-			loadingAnimation();
-			//const randomDelay = Math.floor(Math.random() * (750 - 100) + 1);
-			setTimeout(() => {
-				console.log('click');
-				if (props.isBomb) {
-					console.log('BOOM');
-					flipCardAnimation(false);
-					showAllBombs();
-					state.game.mineChosen(props.mineID, false);
-					document.getElementById('start-game-button').style.display =
-						'flex';
-					document.getElementById('cashout-button').style.display =
-						'none';
-				} else {
+		if (
+			props.isGameActive &&
+			state.game.mines[props.mineID].isChosen == false
+		) {
+			console.log('click');
+			if (props.isBomb) {
+				console.log('BOOM');
+				flipCardAnimation(false);
+				showAllBombs();
+				state.game.mineChosen(props.mineID, false);
+				document.getElementById('start-game-button').style.display =
+					'flex';
+				document.getElementById('cashout-button').style.display =
+					'none';
+			} else {
+				loadingAnimation();
+				setTimeout(() => {
 					console.log('safe');
 					flipCardAnimation(true);
 					state.game.mineChosen(props.mineID, true);
-				}
-				const mineSpot = document.getElementById(
-					`mine-${props.mineID}`
-				);
-				const logoAnimationLayer =
-					mineSpot.childNodes[1].childNodes[1].childNodes[0]
-						.childNodes[0];
-				logoAnimationLayer.style.opacity = 0;
-				logoAnimationLayer.style.strokeDashoffset = -456;
-				state.game.isFlipAnimation = false;
-			}, 750);
+					const mineSpot = document.getElementById(
+						`mine-${props.mineID}`
+					);
+
+					const logoAnimationLayer =
+						mineSpot.childNodes[1].childNodes[1].childNodes[0]
+							.childNodes[0];
+					logoAnimationLayer.style.opacity = 0;
+					logoAnimationLayer.style.strokeDashoffset = -456;
+				}, 750 - state.game.getRandomLoadingDelay());
+			}
 		}
 	};
 
@@ -103,7 +130,6 @@ export default function MineSpot(props) {
 			id={`mine-${props.mineID}`}
 			style={{
 				cursor: props.isGameActive ? 'pointer' : 'auto',
-				opacity: props.isGameActive ? 1 : 0.5,
 			}}
 			onClick={flipMineSpot}
 		>

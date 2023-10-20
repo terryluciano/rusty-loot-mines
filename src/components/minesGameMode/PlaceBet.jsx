@@ -151,11 +151,17 @@ export default function PlaceBet() {
 				numberOfBombsSelected <= 24 &&
 				state.game.isActive == false
 			) {
+				// reset mines
+				state.game.mines.forEach((mine) => {
+					mine.isBomb = false;
+					mine.isChosen = false;
+				});
 				state.game.numberOfBombs = numberOfBombsSelected;
 				cashoutButton.style.display = 'flex';
 				startGameButton.style.display = 'none';
 				resetAllCards();
 				state.game.isBust = false;
+				state.game.mines.forEach((mine) => (mine.isChosen = false));
 				state.game.generateNewGame();
 			} else {
 				console.log('error');

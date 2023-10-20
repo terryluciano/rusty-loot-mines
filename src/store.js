@@ -15,7 +15,6 @@ export const state = createMutable({
 		moneyGained: [],
 		winner: false,
 		cashoutAmount: 0,
-		isFlipAnimation: false,
 		mines: [
 			{
 				mineID: 0,
@@ -149,6 +148,11 @@ export const state = createMutable({
 		get nextMoneyGained() {
 			return this.profit + this.betAmount;
 		},
+		getRandomLoadingDelay() {
+			const randomDelay =
+				Math.floor(Math.random() * (750 - 150) + 1) + 150;
+			return randomDelay;
+		},
 		addMoneyGained(newValue) {
 			if (this.spotsChosen > 1) {
 				const newMoneyGained = { value: newValue - this.betAmount };
@@ -229,12 +233,6 @@ export const state = createMutable({
 				if (mine.isBomb) {
 					console.log(`${index + 1}: Bomb`);
 				}
-			});
-
-			// reset mines
-			this.mines.forEach((mine) => {
-				mine.isBomb = false;
-				mine.isChosen = false;
 			});
 
 			// display winnings or losses

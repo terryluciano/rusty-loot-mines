@@ -1,9 +1,0 @@
-- Mines selected state button seems to be styled incorrectly (Border is solid when it should be a gradient)
-
-- Side history seems to be to far up vertically(Should be centered)
-
-- The "additional" (history under the green and yellow boxes) side history font seems to be wrong.
-
-- Game itself feels laggy and buggy
-
-- remove loading animation on bombs spots

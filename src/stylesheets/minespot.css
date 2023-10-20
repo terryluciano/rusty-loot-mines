@@ -41,7 +41,7 @@
 	stroke-dashoffset: -456;
 	transition-property: stroke-dashoffset;
 	transition-duration: 0.75s;
-	transition-timing-function: ease;
+	transition-timing-function: linear;
 }
 
 .animate-card {
