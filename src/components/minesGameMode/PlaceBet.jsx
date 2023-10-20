@@ -193,10 +193,10 @@ export default function PlaceBet() {
 			<div class='bet-amount'>
 				<p class='mb-2'>Bet Amount</p>
 				<div
-					class='mb-3 rounded'
+					class='mb-3 rounded p-[2px]'
 					style='background: radial-gradient(100% 930% at 100% 50%, rgba(29, 35, 82, 0.48) 0%, rgba(29, 31, 48, 0.48) 100%), radial-gradient(58.03% 60.37% at 50% 29.27%, rgba(118, 124, 255, 0.07) 0%, rgba(118, 124, 255, 0) 100%), linear-gradient(84.53deg, rgba(255, 138, 54, 0.16) 0%, rgba(0, 0, 0, 0) 15.36%), radial-gradient(50% 465% at 0% 50%, rgba(255, 178, 54, 0.08) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(0deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)), linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02))'
 				>
-					<div class='bet-amount-input flex flex-row items-center flex-1 p-2 rounded gap-2 max-w-fit'>
+					<div class='bet-amount-input flex flex-row items-center flex-1 p-2 rounded gap-2 w-full h-full'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							width='21'
@@ -632,7 +632,7 @@ export default function PlaceBet() {
 						/>
 						<QuickOptionButton option='1/2' />
 						<QuickOptionButton option='x2' />
-						<div class='w-px h-full bg-black/[0.16]'></div>
+						<div class='w-px h-[40px] bg-black/[0.16]'></div>
 						<QuickOptionButton option='Clear' />
 					</div>
 				</div>
@@ -649,7 +649,7 @@ export default function PlaceBet() {
 			<div class='mines-amount'>
 				<p class='mb-2'>Mines Amount</p>
 				<div
-					class='mb-3 rounded'
+					class='mb-3 rounded p-[2px]'
 					style='background: radial-gradient(
 			100% 930% at 100% 50%,
 			rgba(29, 35, 82, 0.48) 0%,
@@ -737,7 +737,7 @@ export default function PlaceBet() {
 						>
 							-
 						</button>
-						<div class='w-px h-full bg-black/[0.16]'></div>
+						<div class='w-px h-[40px] bg-black/[0.16]'></div>
 						<button
 							id='max-bombs-amount'
 							class='bet-amount-button h-6 rounded border-white/[.08] border flex-shrink-0'
